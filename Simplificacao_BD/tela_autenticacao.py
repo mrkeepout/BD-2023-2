@@ -9,6 +9,23 @@ def verificar_autenticacao():
         messagebox.showerror("Erro","Usuario ou senha invalidos!")
     else:
         messagebox.showinfo("Concluido", "Sucesso!")
+
+def login():
+    login_usuario = entrada_usuario.get()
+    login_senha = entrada_senha.get()
+
+    cadastro_cursor.cursor.execute("""
+    SELECT * FROM USUARIO
+    WHERE (Login = ? and Senha = ?)                               
+    """, (login_usuario, login_senha))
+    print("Selecionou")
+    verificar_login = cadastro_cursor.cursor.fetchone()
+
+    try:
+        if (login_usuario in verificar_login and login_senha in verificar_login):
+            messagebox.showinfo(title="Login Status", message="Sucesso!")
+    except:
+        messagebox.showerror(title="Login Status", message="Usuario nao castrado!")
 #cores--------------------------------------------------------------------------------------------
 cor1 = "#ffffff"  # branca
 
@@ -41,7 +58,7 @@ entrada_senha = tk.Entry(barra_dados, show="*")
 entrada_usuario.grid(row=1, column=1)
 entrada_senha.grid(row=2, column=1)
 
-botao_login = tk.Button(barra_dados, text="Entrar",font=("Verdana", 12, "bold"), command=verificar_autenticacao)
+botao_login = tk.Button(barra_dados, text="Entrar",font=("Verdana", 12, "bold"), command=login)
 botao_login.grid()
 
 def cadastro():
