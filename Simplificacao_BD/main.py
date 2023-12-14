@@ -1,3 +1,3 @@
-import controladoras
+import tela_autenticacao
 
-controladoras.controladora_usuario()
+tela_autenticacao.show_autenticacao()
