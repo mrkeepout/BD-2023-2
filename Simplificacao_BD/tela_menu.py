@@ -8,7 +8,8 @@ import cadastro_cursor
 cor1 = "#ffffff"  # branca
 
 #janela------------------------------------------------------------------------------------------
-def show():
+def show(data):
+    print(data)
     janela_menu = tk.Toplevel()
     janela_menu.title("Menu")
     janela_menu.geometry("800x600")
@@ -24,13 +25,10 @@ def show():
 
     tk.Label(barra_titulo, text="Menu", font=("Verdana", 30, "bold")).grid(padx=250)
 
-    botao_login = tk.Button(barra_dados, text="Cadastrar Livros",font=("Verdana", 12, "bold"))
+    botao_login = tk.Button(barra_dados, text="Realizar Emprestimo",font=("Verdana", 12, "bold"))
     botao_login.grid()
 
-    botao_login = tk.Button(barra_dados, text="Emprestimo",font=("Verdana", 12, "bold"))
-    botao_login.grid()
-
-    botao_login = tk.Button(barra_dados, text="Acervo",font=("Verdana", 12, "bold"))
+    botao_login = tk.Button(barra_dados, text="Consultar Acervo",font=("Verdana", 12, "bold"))
     botao_login.grid()
 
     # janela_menu.mainloop()

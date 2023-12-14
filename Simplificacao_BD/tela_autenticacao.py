@@ -29,9 +29,9 @@ def show_autenticacao():
                 messagebox.showinfo(title="Login Status", message="Sucesso!")
                 janela_autenticacao.withdraw()
                 if ('Administrador' in verificar_login):
-                    tela_adm.show()
+                    tela_adm.show(verificar_login)
                 else :
-                    tela_menu.show()
+                    tela_menu.show(verificar_login)
         except:
             messagebox.showerror(title="Login Status", message="Usuario nao castrado!")
 
