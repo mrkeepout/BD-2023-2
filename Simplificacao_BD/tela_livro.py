@@ -12,7 +12,7 @@ cor1 = "#ffffff"  # branca
 
 
 #-----------------------------------------------------------------------
-def show_cadastro(data):
+def show_cadastro():
     janela_livro = tk.Tk()
     janela_livro.title("Cadastro de livros")
     janela_livro.geometry("800x600")

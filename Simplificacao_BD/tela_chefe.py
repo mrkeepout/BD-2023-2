@@ -11,7 +11,7 @@ import tela_material
 cor1 = "#ffffff"  # branca
 
 #janela------------------------------------------------------------------------------------------
-def show(data):
+def show():
     janela_adm = tk.Toplevel()
     janela_adm.title("Chefe de Laboratório")
     janela_adm.geometry("800x600")
@@ -27,10 +27,10 @@ def show(data):
 
     tk.Label(barra_titulo, text="Menu Chefe de Lab.", font=("Verdana", 30, "bold")).grid(padx=250)
 
-    botao_login = tk.Button(barra_dados, text="Cadastrar Livros",font=("Verdana", 12, "bold"),  command = lambda: tela_livro.show_cadastro(data))
+    botao_login = tk.Button(barra_dados, text="Cadastrar Livros",font=("Verdana", 12, "bold"),  command = lambda: tela_livro.show_cadastro)
     botao_login.grid()
 
-    botao_login = tk.Button(barra_dados, text="Cadastrar Materiais Didáticos",font=("Verdana", 12, "bold"),  command = lambda: tela_material.show_cadastro(data))
+    botao_login = tk.Button(barra_dados, text="Cadastrar Materiais Didáticos",font=("Verdana", 12, "bold"),  command = lambda: tela_material.show_cadastro)
     botao_login.grid()
 
                 

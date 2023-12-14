@@ -15,7 +15,7 @@ cor1 = "#ffffff"  # branca
 
 
 #-----------------------------------------------------------------------
-def show_cadastro(data):
+def show_cadastro():
     janela_material = tk.Tk()
     janela_material.title("Cadastro de materiais didáticos")
     janela_material.geometry("800x600")

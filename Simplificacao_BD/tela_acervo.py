@@ -40,21 +40,44 @@ def show_acervo(data):
         finally:
             conn.close()
 
-    def verificarIdItem(idUser, idRecurso):
-        print(idUser,idRecurso)
+    #def verificarIdItem(idUser, idRecurso):
+    #    print(idUser,idRecurso)
+    #    if idUser == data[0]:
+    #        try:
+    #            cursor.execute("UPDATE Emprestimo SET Status = 'Devolvido' WHERE fk_Recursos_ID_item = ? AND fk_Usuarios_ID_user = ?", (idRecurso, data[0]))
+    #            conn.commit()
+    #            print('Emprestimo atualizado com sucesso!')
+    #            messagebox.showinfo(title="Emprestimo Status", message="Empréstimo devolvido com Sucesso!")
+    #            janela_acervo.withdraw()
+    #            tela_menu.show(data)
+    #        except Exception as error:
+    #            print('Erro ao atualizar emprestimo!')
+    #            print(error)
+    #        finally:
+    #            conn.close()
+    #    else:
+    #        messagebox.showinfo(title="Emprestimo Status", message="Empréstimo não é do Usuário!")
+
+    def verificarIdItem(idUser, idRecurso, data, conn, cursor):
+        print(idUser, idRecurso)
         if idUser == data[0]:
             try:
-                cursor.execute("UPDATE Emprestimo SET Status = 'Devolvido' WHERE fk_Recursos_ID_item = ? AND fk_Usuarios_ID_user = ?", (idRecurso, data[0]))
+                cursor.execute("SELECT * FROM Emprestimo WHERE fk_Recursos_ID_item = ? AND fk_Usuarios_ID_user = ?", (idRecurso, idUser))
+                result = cursor.fetchone()
+                print("Resultado da busca antes do UPDATE:", result)
+                cursor.execute("UPDATE Emprestimo SET Status = 'Devolvido' WHERE fk_Recursos_ID_item = ? AND fk_Usuarios_ID_user = ?", (idRecurso, idUser))
                 conn.commit()
                 print('Emprestimo atualizado com sucesso!')
                 messagebox.showinfo(title="Emprestimo Status", message="Empréstimo devolvido com Sucesso!")
+                # Feche a janela e mostre o menu (certifique-se de que janela_acervo e tela_menu estão definidos)
                 janela_acervo.withdraw()
                 tela_menu.show(data)
             except Exception as error:
-                print('Erro ao atualizar emprestimo!')
+                print('Erro ao atualizar empréstimo!')
                 print(error)
             finally:
-                conn.close()
+                # Não feche a conexão aqui, pois você pode precisar dela fora desta função.
+                pass
         else:
             messagebox.showinfo(title="Emprestimo Status", message="Empréstimo não é do Usuário!")
 
@@ -102,7 +125,7 @@ def show_acervo(data):
                     status_emprestimo = 'Disponível'
                     tk.Button(barra_resultados, text="Emprestar", font=("Verdana", 12, "bold"), command=lambda idItem=recurso[0]: alugar(idItem)).grid(column=2)
                 else:
-                    tk.Button(barra_resultados, text="Devolver",font=("Verdana", 12, "bold"), command=lambda idUserRecurso = idUser: verificarIdItem(idUserRecurso, recurso[0])).grid(column=2)
+                    tk.Button(barra_resultados, text="Devolver", font=("Verdana", 12, "bold"), command=lambda idUserRecurso = idUser: verificarIdItem(idUserRecurso, recurso[0], data, conn, cursor)).grid(column=2)
 
                 print(recurso)
   

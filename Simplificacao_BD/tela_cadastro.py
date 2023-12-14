@@ -16,7 +16,7 @@ def servico_salgar_senha(salt, senha):
     senha = senha + salt
     return hashlib.sha256(senha.encode('utf-8')).hexdigest()
 
-def show_cadastro(data):
+def show_cadastro():
     janela_cadastro = tk.Tk()
     janela_cadastro.title("Cadastro")
     janela_cadastro.geometry("800x600")
@@ -83,7 +83,7 @@ def show_cadastro(data):
 
     def voltar():
         janela_cadastro.withdraw()
-        tela_adm.show(data)
+        tela_adm.show()
     
     botao_cadastro_tela = tk.Button(barra_interacoes, text="Cadastrar", font=("Verdana", 12, "bold"), command = cadastrar_banco)
     botao_cadastro_tela.grid()
