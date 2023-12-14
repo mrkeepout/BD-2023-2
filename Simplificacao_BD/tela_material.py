@@ -15,7 +15,7 @@ cor1 = "#ffffff"  # branca
 
 
 #-----------------------------------------------------------------------
-def show_cadastro():
+def show_cadastro(data):
     janela_material = tk.Tk()
     janela_material.title("Cadastro de materiais didáticos")
     janela_material.geometry("800x600")
@@ -92,7 +92,7 @@ def show_cadastro():
 
     def voltar():
         janela_material.withdraw()
-        tela_menu.show()
+        tela_menu.show(data)
 
     botao_cadastro_tela = tk.Button(barra_interacoes, text="Cadastrar", font=("Verdana", 12, "bold"), command = cadastrar_banco)
     botao_cadastro_tela.grid()

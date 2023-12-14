@@ -27,10 +27,10 @@ def show(data):
 
     tk.Label(barra_titulo, text="Menu Chefe de Lab.", font=("Verdana", 30, "bold")).grid(padx=250)
 
-    botao_login = tk.Button(barra_dados, text="Cadastrar Livros",font=("Verdana", 12, "bold"),  command = tela_livro.show_cadastro)
+    botao_login = tk.Button(barra_dados, text="Cadastrar Livros",font=("Verdana", 12, "bold"),  command = lambda: tela_livro.show_cadastro(data))
     botao_login.grid()
 
-    botao_login = tk.Button(barra_dados, text="Cadastrar Materiais Didáticos",font=("Verdana", 12, "bold"),  command = tela_material.show_cadastro)
+    botao_login = tk.Button(barra_dados, text="Cadastrar Materiais Didáticos",font=("Verdana", 12, "bold"),  command = lambda: tela_material.show_cadastro(data))
     botao_login.grid()
 
                 

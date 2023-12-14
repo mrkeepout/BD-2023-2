@@ -40,19 +40,24 @@ def show_acervo(data):
         finally:
             conn.close()
 
-    def verificarIdItem(idRecurso):
-        try:
-            cursor.execute("UPDATE Emprestimo SET Status = 'Devolvido' WHERE fk_Recursos_ID_item = ? AND fk_Usuarios_ID_user = ?", (idRecurso, data[0]))
-            conn.commit()
-            print('Emprestimo atualizado com sucesso!')
-            messagebox.showinfo(title="Emprestimo Status", message="Empréstimo devolvido com Sucesso!")
-            janela_acervo.withdraw()
-            tela_menu.show(data)
-        except Exception as error:
-            print('Erro ao atualizar emprestimo!')
-            print(error)
-        finally:
-            conn.close()
+    def verificarIdItem(idUser, idRecurso):
+        print(idUser,idRecurso)
+        if idUser == data[0]:
+            try:
+                cursor.execute("UPDATE Emprestimo SET Status = 'Devolvido' WHERE fk_Recursos_ID_item = ? AND fk_Usuarios_ID_user = ?", (idRecurso, data[0]))
+                conn.commit()
+                print('Emprestimo atualizado com sucesso!')
+                messagebox.showinfo(title="Emprestimo Status", message="Empréstimo devolvido com Sucesso!")
+                janela_acervo.withdraw()
+                tela_menu.show(data)
+            except Exception as error:
+                print('Erro ao atualizar emprestimo!')
+                print(error)
+            finally:
+                conn.close()
+        else:
+            messagebox.showinfo(title="Emprestimo Status", message="Empréstimo não é do Usuário!")
+
 
     def consulta_banco():
         recurso_termo = entrada_termo.get()
@@ -84,15 +89,20 @@ def show_acervo(data):
 
                 else:
                     id_busca = recurso[0]
-                query_status = f"SELECT Status FROM EMPRESTIMO WHERE fk_Recursos_ID_Item = ? AND Status = 'Emprestado' "
-                cursor.execute(query_status, (id_busca, ))
-                status_emprestimo = cursor.fetchone()
 
+                query_status = f"SELECT * FROM EMPRESTIMO WHERE fk_Recursos_ID_Item = ? AND Status = 'Emprestado' "
+                cursor.execute(query_status, (id_busca, ))
+                resultado_status = cursor.fetchone()
+                print(resultado_status)
+
+                status_emprestimo = resultado_status[2]
+                idUser = resultado_status[4]
+                print(status_emprestimo, idUser)
                 if status_emprestimo == None or status_emprestimo[0] == '' or  status_emprestimo[0] == 'Devolvido':
                     status_emprestimo = 'Disponível'
                     tk.Button(barra_resultados, text="Emprestar", font=("Verdana", 12, "bold"), command=lambda idItem=recurso[0]: alugar(idItem)).grid(column=2)
                 else:
-                    tk.Button(barra_resultados, text="Devolver",font=("Verdana", 12, "bold"), command=lambda: verificarIdItem(recurso[0])).grid(column=2)
+                    tk.Button(barra_resultados, text="Devolver",font=("Verdana", 12, "bold"), command=lambda idUserRecurso = idUser: verificarIdItem(idUserRecurso, recurso[0])).grid(column=2)
 
                 print(recurso)
   
