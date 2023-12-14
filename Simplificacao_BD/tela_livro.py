@@ -103,7 +103,7 @@ def show_cadastro():
 
     def voltar():
         janela_livro.withdraw()
-        tela_menu.show(data)
+        # tela_menu.show(data)
 
     botao_cadastro_tela = tk.Button(barra_interacoes, text="Cadastrar", font=("Verdana", 12, "bold"), command = cadastrar_banco)
     botao_cadastro_tela.grid()

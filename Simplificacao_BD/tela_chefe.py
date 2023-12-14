@@ -6,6 +6,8 @@ import cadastro_cursor
 import tela_cadastro
 import tela_livro
 import tela_material
+import tela_acervo
+
 
 #cores--------------------------------------------------------------------------------------------
 cor1 = "#ffffff"  # branca
@@ -17,6 +19,10 @@ def show():
     janela_adm.geometry("800x600")
     janela_adm.configure(background=cor1)
     janela_adm.resizable(width=False, height=False)
+
+    def consultar():
+        janela_adm.withdraw()
+        tela_acervo.show_acervo(data)
 
 #Dividindo a janela------------------------------------------------------------------------------------------
     barra_titulo = Frame(janela_adm, width=800, height=200, relief="flat")
@@ -32,6 +38,10 @@ def show():
 
     botao_login = tk.Button(barra_dados, text="Cadastrar Materiais Didáticos",font=("Verdana", 12, "bold"),  command = lambda: tela_material.show_cadastro)
     botao_login.grid()
+
+    botao_consulta = tk.Button(barra_dados, text="Consultar Acervo",font=("Verdana", 12, "bold"), command=consultar)
+    botao_consulta.grid()
+
 
                 
     # janela_menu.mainloop()

@@ -40,26 +40,9 @@ def show_acervo(data):
         finally:
             conn.close()
 
-    #def verificarIdItem(idUser, idRecurso):
-    #    print(idUser,idRecurso)
-    #    if idUser == data[0]:
-    #        try:
-    #            cursor.execute("UPDATE Emprestimo SET Status = 'Devolvido' WHERE fk_Recursos_ID_item = ? AND fk_Usuarios_ID_user = ?", (idRecurso, data[0]))
-    #            conn.commit()
-    #            print('Emprestimo atualizado com sucesso!')
-    #            messagebox.showinfo(title="Emprestimo Status", message="Empréstimo devolvido com Sucesso!")
-    #            janela_acervo.withdraw()
-    #            tela_menu.show(data)
-    #        except Exception as error:
-    #            print('Erro ao atualizar emprestimo!')
-    #            print(error)
-    #        finally:
-    #            conn.close()
-    #    else:
-    #        messagebox.showinfo(title="Emprestimo Status", message="Empréstimo não é do Usuário!")
+    def verificarIdItem(idUser, idRecurso):
+        print(idUser,idRecurso)
 
-    def verificarIdItem(idUser, idRecurso, data, conn, cursor):
-        print(idUser, idRecurso)
         if idUser == data[0]:
             try:
                 cursor.execute("SELECT * FROM Emprestimo WHERE fk_Recursos_ID_item = ? AND fk_Usuarios_ID_user = ?", (idRecurso, idUser))
@@ -121,11 +104,12 @@ def show_acervo(data):
                 status_emprestimo = resultado_status[2]
                 idUser = resultado_status[4]
                 print(status_emprestimo, idUser)
-                if status_emprestimo == None or status_emprestimo[0] == '' or  status_emprestimo[0] == 'Devolvido':
-                    status_emprestimo = 'Disponível'
-                    tk.Button(barra_resultados, text="Emprestar", font=("Verdana", 12, "bold"), command=lambda idItem=recurso[0]: alugar(idItem)).grid(column=2)
-                else:
-                    tk.Button(barra_resultados, text="Devolver", font=("Verdana", 12, "bold"), command=lambda idUserRecurso = idUser: verificarIdItem(idUserRecurso, recurso[0], data, conn, cursor)).grid(column=2)
+                if data[6] != 'Cliente':
+                    if status_emprestimo == None or status_emprestimo[0] == '' or  status_emprestimo[0] == 'Devolvido':
+                        status_emprestimo = 'Disponível'
+                        tk.Button(barra_resultados, text="Emprestar", font=("Verdana", 12, "bold"), command=lambda idItem=recurso[0]: alugar(idItem)).grid(column=2)
+                    else:
+                        tk.Button(barra_resultados, text="Devolver",font=("Verdana", 12, "bold"), command=lambda idUserRecurso = idUser: verificarIdItem(idUserRecurso, recurso[0])).grid(column=2)
 
                 print(recurso)
   
@@ -165,6 +149,6 @@ def show_acervo(data):
     entrada_termo = tk.Entry(barra_posCombo)
     entrada_termo.grid(row=3, column=1)
 
-    botao_acervo = tk.Button(barra_botao, text="Buscar",font=("Verdana", 12, "bold"), command=consulta_banco).grid()
+    tk.Button(barra_botao, text="Buscar",font=("Verdana", 12, "bold"), command= consulta_banco).grid()
 
     janela_acervo.mainloop()

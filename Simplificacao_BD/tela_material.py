@@ -88,11 +88,11 @@ def show_cadastro():
         conn.commit()
         
         messagebox.showinfo(title="Cadastro Status", message="Cadastramento feito com Sucesso!")
-        voltar()
+    #     voltar()
 
-    def voltar():
-        janela_material.withdraw()
-        tela_menu.show(data)
+    # def voltar():
+    #     janela_material.withdraw()
+    #     tela_menu.show(data)
 
     botao_cadastro_tela = tk.Button(barra_interacoes, text="Cadastrar", font=("Verdana", 12, "bold"), command = cadastrar_banco)
     botao_cadastro_tela.grid()

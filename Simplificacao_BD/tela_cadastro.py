@@ -83,9 +83,9 @@ def show_cadastro():
 
     def voltar():
         janela_cadastro.withdraw()
-        tela_adm.show()
+        # tela_adm.show()
     
-    botao_cadastro_tela = tk.Button(barra_interacoes, text="Cadastrar", font=("Verdana", 12, "bold"), command = cadastrar_banco)
+    botao_cadastro_tela = tk.Button(barra_interacoes, text="Cadastrar", font=("Verdana", 12, "bold"), command =lambda: cadastrar_banco)
     botao_cadastro_tela.grid()
-    botao_voltar = tk.Button(barra_interacoes, text="Voltar", font=("Verdana", 12, "bold"), command=voltar)
+    botao_voltar = tk.Button(barra_interacoes, text="Voltar", font=("Verdana", 12, "bold"), command=lambda:voltar)
     botao_voltar.grid()
