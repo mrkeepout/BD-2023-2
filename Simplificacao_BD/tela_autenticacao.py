@@ -5,8 +5,6 @@ from tkinter import ttk
 import cadastro_cursor
 import tela_menu
 import tela_adm
-import tela_cadastro
-
 
 
 #cores--------------------------------------------------------------------------------------------
@@ -38,15 +36,11 @@ def show_autenticacao():
         except:
             messagebox.showerror(title="Login Status", message="Usuario nao castrado!")
 
-    def mudarPagina():
-        janela_autenticacao.withdraw()
-        tela_cadastro.show_cadastro()
-        
 #janela------------------------------------------------------------------------------------------
     janela_autenticacao = tk.Tk()
     janela_autenticacao.title("Autenticação")
-    janela_autenticacao.geometry("800x600")
-    janela_autenticacao.configure(background=cor1)
+    janela_autenticacao.geometry("1200x800")
+    janela_autenticacao.configure(bg = "#F1F1F1")
     janela_autenticacao.resizable(width=False, height=False)
 
     #Dividindo a janela------------------------------------------------------------------------------------------
@@ -73,12 +67,5 @@ def show_autenticacao():
 
     botao_login = tk.Button(barra_dados, text="Entrar",font=("Verdana", 12, "bold"), command=login)
     botao_login.grid()
-
-    botao_cadastro = tk.Button(barra_dados, text="Cadastrar", font=("Verdana", 12, "bold"), command=mudarPagina)
-    botao_cadastro.grid()
-
-
-
-
 
     janela_autenticacao.mainloop()
