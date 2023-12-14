@@ -13,7 +13,7 @@ cor1 = "#ffffff"  # branca
 #janela------------------------------------------------------------------------------------------
 def show(data):
     janela_adm = tk.Toplevel()
-    janela_adm.title("Administrador")
+    janela_adm.title("Chefe de Laboratório")
     janela_adm.geometry("800x600")
     janela_adm.configure(background=cor1)
     janela_adm.resizable(width=False, height=False)
@@ -25,7 +25,7 @@ def show(data):
     barra_dados = Frame(janela_adm, width=800, height=400, relief="flat")
     barra_dados.grid(row=1, column=0, pady=0, padx=0, sticky=NSEW)
 
-    tk.Label(barra_titulo, text="Menu Administrador", font=("Verdana", 30, "bold")).grid(padx=250)
+    tk.Label(barra_titulo, text="Menu Chefe de Lab.", font=("Verdana", 30, "bold")).grid(padx=250)
 
     botao_login = tk.Button(barra_dados, text="Cadastrar Livros",font=("Verdana", 12, "bold"),  command = tela_livro.show_cadastro)
     botao_login.grid()
@@ -33,8 +33,5 @@ def show(data):
     botao_login = tk.Button(barra_dados, text="Cadastrar Materiais Didáticos",font=("Verdana", 12, "bold"),  command = tela_material.show_cadastro)
     botao_login.grid()
 
-    botao_cadastro = tk.Button(barra_dados, text="Cadastrar Usuários", font=("Verdana", 12, "bold"), command=tela_cadastro.show_cadastro)
-    botao_cadastro.grid()
-    
                 
     # janela_menu.mainloop()

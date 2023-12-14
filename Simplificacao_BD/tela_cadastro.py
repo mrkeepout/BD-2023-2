@@ -3,7 +3,7 @@ from tkinter import messagebox
 from tkinter import *
 from tkinter import ttk
 import cadastro_cursor
-import tela_autenticacao
+import tela_adm
 
 
 
@@ -16,7 +16,7 @@ def servico_salgar_senha(salt, senha):
     senha = senha + salt
     return hashlib.sha256(senha.encode('utf-8')).hexdigest()
 
-def show_cadastro():
+def show_cadastro(data):
     janela_cadastro = tk.Tk()
     janela_cadastro.title("Cadastro")
     janela_cadastro.geometry("800x600")
@@ -58,7 +58,7 @@ def show_cadastro():
     label_funcao = tk.Label(barra_interacoes, text="Tipo de cadastro:", font=("Verdana", 12, "bold")).grid(row=5, column=0)
     n = tk.StringVar()
     tipo_combo_box = ttk.Combobox(barra_interacoes, width= 15, textvariable=n, font=("Verdana", 12, "bold"))
-    tipo_combo_box["values"] = ("Cliente", "Administrador")
+    tipo_combo_box["values"] = ("Cliente", "Administrador", "Chefe")
     tipo_combo_box.grid(row= 5, column=1)
 
    
@@ -83,7 +83,7 @@ def show_cadastro():
 
     def voltar():
         janela_cadastro.withdraw()
-        tela_autenticacao.show_autenticacao()
+        tela_adm.show(data)
     
     botao_cadastro_tela = tk.Button(barra_interacoes, text="Cadastrar", font=("Verdana", 12, "bold"), command = cadastrar_banco)
     botao_cadastro_tela.grid()

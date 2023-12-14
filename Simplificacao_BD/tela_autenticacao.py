@@ -5,6 +5,8 @@ from tkinter import ttk
 import cadastro_cursor
 import tela_menu
 import tela_adm
+import tela_cadastro
+import tela_chefe
 
 
 #cores--------------------------------------------------------------------------------------------
@@ -22,7 +24,6 @@ def show_autenticacao():
         SELECT * FROM USUARIO
         WHERE (Login = ? and Senha = ?)                               
         """, (login_usuario, hash_senha))
-        print("Selecionou")
         verificar_login = cadastro_cursor.cursor.fetchone()
 
         try:
@@ -31,10 +32,13 @@ def show_autenticacao():
                 janela_autenticacao.withdraw()
                 if ('Administrador' in verificar_login):
                     tela_adm.show(verificar_login)
-                else :
+                elif ('Chefe' in verificar_login):
+                    tela_chefe.show(verificar_login)
+                else:
                     tela_menu.show(verificar_login)
+                
         except:
-            messagebox.showerror(title="Login Status", message="Usuario nao castrado!")
+            messagebox.showerror(title="Login Status", message="Usuario nao cadastrado!")
 
 #janela------------------------------------------------------------------------------------------
     janela_autenticacao = tk.Tk()
