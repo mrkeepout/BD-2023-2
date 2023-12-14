@@ -10,8 +10,12 @@ import tela_autenticacao
 #cores--------------------------------------------------------------------------------------------
 cor1 = "#ffffff"  # branca
 
-
 #-----------------------------------------------------------------------
+def servico_salgar_senha(salt, senha):
+    import hashlib
+    senha = senha + salt
+    return hashlib.sha256(senha.encode('utf-8')).hexdigest()
+
 def show_cadastro():
     janela_cadastro = tk.Tk()
     janela_cadastro.title("Cadastro")
@@ -65,17 +69,22 @@ def show_cadastro():
         sobrenome_Banco = entrada_sobrenome.get()
         funcao_Banco = tipo_combo_box.get()
         teste_imagem = 'https://www.google.com.br'
+        
+        salt = '5gz'
+        hash_senha = servico_salgar_senha(salt, senha_Banco)
+        
         cadastro_cursor.cursor.execute("""
         INSERT INTO USUARIO(Nome, Sobrenome, Login, Senha, URI_foto_user, Funcao) VALUES(?,?,?,?,?,?)
-        """, (nome_Banco, sobrenome_Banco, usuario_Banco, senha_Banco, teste_imagem, funcao_Banco))
+        """, (nome_Banco, sobrenome_Banco, usuario_Banco, hash_senha, teste_imagem, funcao_Banco))
         cadastro_cursor.comn.commit()
         messagebox.showinfo(title="Cadastro Status", message="Cadastramento feito com Sucesso!")
+
         voltar()
 
     def voltar():
         janela_cadastro.withdraw()
         tela_autenticacao.show_autenticacao()
-
+    
     botao_cadastro_tela = tk.Button(barra_interacoes, text="Cadastrar", font=("Verdana", 12, "bold"), command = cadastrar_banco)
     botao_cadastro_tela.grid()
     botao_voltar = tk.Button(barra_interacoes, text="Voltar", font=("Verdana", 12, "bold"), command=voltar)

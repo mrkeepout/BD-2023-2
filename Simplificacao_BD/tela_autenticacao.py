@@ -16,16 +16,19 @@ def show_autenticacao():
     def login():
         login_usuario = entrada_usuario.get()
         login_senha = entrada_senha.get()
+        
+        salt = '5gz'
+        hash_senha = tela_cadastro.servico_salgar_senha(salt, login_senha)
 
         cadastro_cursor.cursor.execute("""
         SELECT * FROM USUARIO
         WHERE (Login = ? and Senha = ?)                               
-        """, (login_usuario, login_senha))
+        """, (login_usuario, hash_senha))
         print("Selecionou")
         verificar_login = cadastro_cursor.cursor.fetchone()
 
         try:
-            if (login_usuario in verificar_login and login_senha in verificar_login):
+            if (login_usuario in verificar_login and hash_senha in verificar_login):
                 messagebox.showinfo(title="Login Status", message="Sucesso!")
                 janela_autenticacao.withdraw()
                 if ('Administrador' in verificar_login):
